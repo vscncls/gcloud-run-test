@@ -1,4 +1,5 @@
 from flask import Flask
+from os import environ
 
 app = Flask(__name__)
 
@@ -8,4 +9,4 @@ def index():
     return 'hello'
 
 
-app.run('0.0.0.0', 8000)
+app.run('0.0.0.0', environ.get('PORT') or 8000)
