@@ -1,4 +1,7 @@
 steps:
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: 'bash'
+    args: [ '-c', "for secret in $(gcloud secrets list | tail -n +2 | awk '{print $1}'); do echo \"$secret=$(gcloud secrets versions access latest --secret=$secret)\" >> .env; done"]
   - name: gcr.io/cloud-builders/docker
     args:
       - build
